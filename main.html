@@ -1,16 +1,85 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorted Bands</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+
+    <h1>Sorted Bands</h1>
+    <ul id="band"></ul>
+
+    <script>
+        const bands = [
+            'The Plot in You', 
+            'The Devil Wears Prada', 
+            'Pierce the Veil', 
+            'Norma Jean', 
+            'The Bled', 
+            'Say Anything', 
+            'The Midway State', 
+            'We Came as Romans', 
+            'Counterparts', 
+            'Oh, Sleeper', 
+            'A Skylit Drive', 
+            'Anywhere But Here', 
+            'An Old Dog'
+        ];
+
+        // Words to ignore during sorting
+        const ignoreWords = ['a', 'an', 'the'];
+
+        // Function to sort bands ignoring the specified words
+        function sortBands(bands) {
+            return bands.sort((a, b) => {
+                // Remove ignore words for sorting comparison
+                const cleanA = removeIgnoreWords(a);
+                const cleanB = removeIgnoreWords(b);
+                return cleanA.localeCompare(cleanB);
+            });
+        }
+
+        // Function to remove ignored words (a, an, the) from the start of a string
+        function removeIgnoreWords(str) {
+            const words = str.toLowerCase().split(" ");
+            if (ignoreWords.includes(words[0])) {
+                words.shift();  // Remove the first word if it's an ignored word
+            }
+            return words.join(" ");
+        }
+
+        // Sort the bands
+        const sortedBands = sortBands(bands);
+
+        // Display the sorted bands in the list with id "band"
+        const ul = document.getElementById('band');
+        sortedBands.forEach(band => {
+            const li = document.createElement('li');
+            li.textContent = band;
+            ul.appendChild(li);
+        });
+    </script>
 
 </body>
-
 </html>
